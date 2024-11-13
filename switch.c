@@ -67,6 +67,11 @@ struct proc_stats* pstats(struct proc* target){
     return &sim_status.proc_stats[target->pid];
 }
 
+void boost() {
+    for(int i=0; i<NUMPROC; i++)
+        proc[i].priority = MAX_PRIORITY;
+}
+
 int swtch(struct proc* target){
     int intended;
 
@@ -82,6 +87,11 @@ int swtch(struct proc* target){
 
     pstats(target)->runtime += intended;
     sim_status.runtime += intended;
+
+    if (sim_status.runtime % BOOST_FREQ == 0) {
+        boost();
+    }
+
     return intended;
 }
 

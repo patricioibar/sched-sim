@@ -18,6 +18,7 @@ void init(){
         proc[i].pid = i;
         proc[i].status = RUNNABLE;
         proc[i].runtime = 0;
+        proc[i].priority = MAX_PRIORITY;
     }
 }
 
